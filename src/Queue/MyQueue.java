@@ -10,6 +10,13 @@ public class MyQueue {
             this.data = data;
             this.next = null;
         }
+        public int getData() {
+            return data;
+        }
+        public void setData(int data) {
+            this.data = data;
+        }
+        
     }
     private Node front;
     private Node rear;
@@ -41,6 +48,24 @@ public class MyQueue {
         rear = newNode;
         length++;
     }
+    public int dequeue(){
+        if(isEmpty()){
+            return 0;
+        }
+        if(front == rear){
+            front =rear = null;
+            return 1;
+        }
+        Node temp = front;
+        while(temp.next!=rear){
+            temp=temp.next;
+        }
+        Node a = temp.next;
+        temp.next=null;
+        rear=temp;
+        length--;
+        return a.getData();
+    }
     // dequeue(): remove front element and return data of removed element
 // BTVN 1: 2 , 19 -> LeetCode
 // BTVN 2: Implement Stack and Queue
@@ -52,6 +77,7 @@ public class MyQueue {
         queue.enqueue(4);
         queue.enqueue(5);
         System.out.println("Queue length: " + queue.getLength());
+        System.out.println(queue.dequeue());
     }
 
 }
